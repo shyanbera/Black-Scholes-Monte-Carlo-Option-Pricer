@@ -9,6 +9,6 @@ def monte_carlo_option_pricer(S_0, r, sigma, T, K, num_simulations):
     expected_option_value = np.exp(-r*T) * np.mean(payoff)
     return(expected_option_value)
 
-print(monte_carlo_option_pricer(100,0.05,1,20,100,1000000))
+print(monte_carlo_option_pricer(100,0.05,0.2,1,100,100000))
       
 
