@@ -1,4 +1,5 @@
 import numpy as np
+import scipy.stats as stats
 
 # this function calculates the fair price of a European call option under Black-Scholes framework assumptions
 
@@ -9,6 +10,13 @@ def monte_carlo_option_pricer(S_0, r, sigma, T, K, num_simulations):
     expected_option_value = np.exp(-r*T) * np.mean(payoff)
     return(expected_option_value)
 
-print(monte_carlo_option_pricer(100,0.05,0.2,1,100,100000))
-      
+def analytical_call_price(S_0, r, sigma, T, K):
+    d_2 = - (np.log(K/S_0)-(r-0.5*(sigma**2))*T)/(sigma*np.sqrt(T))
+    d_1 = d_2 + sigma*np.sqrt(T)
+    fair_price = S_0*stats.norm.cdf(d_1) - K*np.exp(-r*T)*stats.norm.cdf(d_2)
+    return fair_price
+
+print(monte_carlo_option_pricer(100,0.05,0.2,1,110,10000000))
+print(analytical_call_price(100,0.05,0.2,1,110))
+   
 
