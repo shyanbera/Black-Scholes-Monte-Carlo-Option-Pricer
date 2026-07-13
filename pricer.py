@@ -16,7 +16,15 @@ def analytical_call_price(S_0, r, sigma, T, K):
     fair_price = S_0*stats.norm.cdf(d_1) - K*np.exp(-r*T)*stats.norm.cdf(d_2)
     return fair_price
 
-print(monte_carlo_option_pricer(100,0.05,0.2,1,110,10000000))
-print(analytical_call_price(100,0.05,0.2,1,110))
+def monte_carlo_antithetic(S_0,r,sigma,T,K, num_simulations):
+    Z_1 = np.random.standard_normal(num_simulations//2)
+    Z_2 = - Z_1
+    Z = np.concatenate(Z_1,Z_2)
+    # literally copy pasting the next section of code from the original monte carlo pricer
+    S_T = S_0 * np.exp((r-(sigma**2)/2)*T + sigma * np.sqrt(T) * Z)
+    payoff = np.maximum(S_T-K, 0)
+    expected_option_value = np.exp(-r*T) * np.mean(payoff)
+    return(expected_option_value)
+
    
 

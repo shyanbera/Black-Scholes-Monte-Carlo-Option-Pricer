@@ -36,4 +36,4 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
 
 
 if __name__ == "__main__":
-    convergence_test(100,0.05,0.2,1,100,100)
+    convergence_test(100,0.05,0.2,1,100,1000)
