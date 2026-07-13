@@ -26,5 +26,13 @@ def monte_carlo_antithetic(S_0,r,sigma,T,K, num_simulations):
     expected_option_value = np.exp(-r*T) * np.mean(payoff)
     return(expected_option_value)
 
-   
+def monte_carlo_control(S_0,r,sigma,T,K,num_simulations):
+    Z=np.random.standard_normal(num_simulations)
+    S_T = S_0 * np.exp((r-(sigma**2)/2)*T + sigma*np.sqrt(T)*Z)
+    discounted_payoffs = np.exp(-r*T) * np.maximum(S_T-K,0)
+    covariance_matrix = np.cov(S_T,discounted_payoffs)
+    covariance = covariance_matrix[1,0]
+    c_star = covariance/np.var(S_T)
+    Y_CV = discounted_payoffs - c_star * (S_T - S_0 * np.exp(r*T))
+    return np.mean(Y_CV)
 
