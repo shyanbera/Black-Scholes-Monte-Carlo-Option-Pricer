@@ -19,7 +19,7 @@ def analytical_call_price(S_0, r, sigma, T, K):
 def monte_carlo_antithetic(S_0,r,sigma,T,K, num_simulations):
     Z_1 = np.random.standard_normal(num_simulations//2)
     Z_2 = - Z_1
-    Z = np.concatenate(Z_1,Z_2)
+    Z = np.concatenate((Z_1,Z_2))
     # literally copy pasting the next section of code from the original monte carlo pricer
     S_T = S_0 * np.exp((r-(sigma**2)/2)*T + sigma * np.sqrt(T) * Z)
     payoff = np.maximum(S_T-K, 0)
