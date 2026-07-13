@@ -39,8 +39,13 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
 
     plt.figure(figsize = (10,6))
     markers=['o','s']
+
+
     for (name,error_list), marker in zip(errors_dict.items(),markers):
-        plt.plot(path_counts,error_list,marker=marker,label=name)
+        log_path_counts = np.log(path_counts)
+        log_error = np.log(error_list)
+        gradient, intercept = np.polyfit(log_path_counts,log_error,1)
+        plt.plot(path_counts,error_list,marker=marker,label=f"{name}, Gradient={gradient:.2f}, y-intercept={intercept:.2f}")
     plt.xscale('log')
     plt.yscale('log')
     plt.title('Error of MC value against number of paths simulated')
