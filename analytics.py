@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from pricer import monte_carlo_option_pricer, analytical_call_price, monte_carlo_antithetic
+from pricer import monte_carlo_option_pricer, analytical_call_price, monte_carlo_antithetic, monte_carlo_control
 
 
 def convergence_test(S_0,r,sigma,T,K,num_experiments):
@@ -11,12 +11,14 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
 
     pricers = {
         "Naive MC": monte_carlo_option_pricer,
-        "Antithetic MC": monte_carlo_antithetic
+        "Antithetic MC": monte_carlo_antithetic,
+        "Control MC": monte_carlo_control
     }
 
     errors_dict = {
         "Naive MC": [],
-        "Antithetic MC": []
+        "Antithetic MC": [],
+        "Control MC": []
     }
 
     for name,pricer_func in pricers.items():
@@ -38,7 +40,7 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
         print("\n")
 
     plt.figure(figsize = (10,6))
-    markers=['o','s']
+    markers=['o','s', '^']
 
 
     for (name,error_list), marker in zip(errors_dict.items(),markers):
