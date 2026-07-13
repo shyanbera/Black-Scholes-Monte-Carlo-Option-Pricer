@@ -1,11 +1,19 @@
-# Monte Carlo Simulation Options Pricer
+# Monte Carlo Simulation Options Pricer with Variance Reduction
 
-The goal of this project is to use a Monte Carlo simulation to determine the fair price of a European call option under Black-Scholes framework assumptions. We are assuming the market to be perfectly liquid, meaning that there is no bid-ask spread or transaction costs which would significantly cut into profits. Also, we assume constant volatility which is unlikely in practice.
+The goal of this project was to use a Monte Carlo simulation to determine the fair price of a European call option under Black-Scholes framework assumptions.
 
-I intend on adding further sections to be able to visualise the results and plot the convergence, calculate the greeks, implement variance reduction techniques and hopefully use some real market data to calculate the parameters for the option pricer function.
 
-With regards to the mathematics behind these models, after taking 'Stochastic Financial Models' in Part II of the Mathematical Tripos, I intend to go back and learn the rigorous derivation for modelling the stock price with GBM and solving the SDE. However, I am currently in a position to understand how we obtain the analytical formula for the call option's value if we accept the formula for terminal stock price:
+![Log-Log Convergence Plot](convergence_graph.png)
 
-$$S_T = S_0 \exp\left( \left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T} Z \right)$$
+---
+### Results Table:
 
-For this derivation please refer to MATHEMATICS.md
+Analytical Price: £10.45
+
+| Paths (N)    | Naive MC Error | Antithetic Error | Control Variates Error |
+| ------------ | -------------  | ---------------- | ---------------------- |
+| 100          | £1.1163        | £0.8237          | £0.4360
+| 1000         | £0.3375        | £0.2626          | £0.1306
+| 10000        | £0.0995        | £0.0798          | £0.0429
+| 100000       | £0.0311        | £0.0274          | £0.0128
+| 1000000      | £0.0113        | £0.0087          | £0.0047

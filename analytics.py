@@ -54,6 +54,7 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
     plt.xlabel('Number of paths')
     plt.ylabel('Absolute error')
     plt.legend()
+    plt.savefig('convergence_graph.png', dpi=300, bbox_inches='tight')
 
     plt.show()
             
