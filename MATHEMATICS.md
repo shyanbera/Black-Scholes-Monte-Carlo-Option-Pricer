@@ -1,5 +1,5 @@
 
-## Deriving Analytical Solution:
+## Deriving Analytical Solution for Option Price:
 
 To determine the fair price of the call option, we find the expected value of the payoff, discounted back to today:
 
@@ -65,9 +65,23 @@ By standard normal symmetry, this evaluates to:
 
 $$\text{Part A} = S_0 N(d_1)$$
 
-## 4. The Final Analytical Solution
+### The Final Analytical Solution
 
 Combining Part A and Part B yields the closed-form Black-Scholes-Merton equation for a European Call Option:
 
 $$C = S_0 N(d_1) - K e^{-rT} N(d_2)$$
+
+## Control Variates Technique:
+
+Define $Y$ = $e^{-rT} \mathbb{E}(\max(S_T-K,0))$ and $X = S_T$
+
+Then we note that by defining $Y_{CV} = Y_{MC} - c (X - \mathbb{E}(X))$ we have that $\mathbb{E}(Y_{CV}) = \mathbb{E}(Y_{MC})$ 
+
+Also taking variances of both sides we get $\text{Var}(Y_{CV}) = \text{Var}(Y_{MC}) + c^2\text{Var}(X) - 2c\text{Cov}(X,Y)$
+
+
+
+and one can choose $c^*$ = $\frac{\text{Cov}(X,Y)}{\text{Var}(X)}$ to minimise the variance. 
+
+Using this optimal value of c we can then obtain the relationship $\text{Var}(Y_{CV}) = \text{Var}(Y_{MC}) (1-\rho^2)$ where $\rho$ (the correlation) is given by $$\rho = \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\text{Var}(Y)}}$$
 
