@@ -23,21 +23,19 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
 
     for name,pricer_func in pricers.items():
         print(f"--- Running {name} ---")
-        print(f"{'Paths (N)':<12} | {'MC Price':<10} | {'Abs Error':<10}")
+        print(f"{'Paths (N)':<12} | {'MC Price':<10} | {'Standard Error':<10}")
         print("-" * 38)
         for N in path_counts:
-            total_mc_price = 0
-            total_mc_error = 0
+            simulated_prices =[]
             for experiment in range(num_experiments):
                 mc_price = pricer_func(S_0,r,sigma,T,K,N)
-                abs_mc_error = abs(mc_price - true_analytical_price)
-                total_mc_price+= mc_price
-                total_mc_error += abs_mc_error
-            avg_mc_price = total_mc_price/num_experiments
-            avg_mc_error = total_mc_error/num_experiments
-            errors_dict[name].append(avg_mc_error)
-            print(f"{N:<12} | £{avg_mc_price:<9.2f} | £{avg_mc_error:<10.4f}")
-        print("\n")
+                simulated_prices.append(mc_price)
+            avg_mc_price = np.mean(simulated_prices)
+            std_error = np.std(simulated_prices, ddof=1)
+            errors_dict[name].append(std_error)
+            print(f"{N:<12} | {avg_mc_price:<10.2f} | {std_error:<10.4f}")
+         
+            
 
     plt.figure(figsize = (10,6))
     markers=['o','s', '^']
@@ -50,9 +48,9 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
         plt.plot(path_counts,error_list,marker=marker,label=f"{name}, Gradient={gradient:.2f}, y-intercept={intercept:.2f}")
     plt.xscale('log')
     plt.yscale('log')
-    plt.title('Error of MC value against number of paths simulated')
+    plt.title('Standard error of MC value against number of paths simulated')
     plt.xlabel('Number of paths')
-    plt.ylabel('Absolute error')
+    plt.ylabel('Standard error')
     plt.legend()
     plt.savefig('convergence_graph.png', dpi=300, bbox_inches='tight')
 
