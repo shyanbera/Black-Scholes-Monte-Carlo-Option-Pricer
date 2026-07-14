@@ -15,13 +15,17 @@ This log-log graph (with gradient 1/2) confirms the $\mathcal{O}(N^{-1/2})$ conv
 
 Analytical Price: £10.45
 
-| Paths (N)    | Naive MC Error | Antithetic Error | Control Variates Error |
-| ------------ | -------------  | ---------------- | ---------------------- |
-| 100          | £1.1163        | £0.8237          | £0.4360
-| 1000         | £0.3375        | £0.2626          | £0.1306
-| 10000        | £0.0995        | £0.0798          | £0.0429
-| 100000       | £0.0311        | £0.0274          | £0.0128
-| 1000000      | £0.0113        | £0.0087          | £0.0047
+[//]: # (START_TABLE)
+
+| Paths (N) | Naive SE | Antithetic SE | Control SE |
+|---|---|---|---|
+| 100 | 1.3541 | 1.032827 | 0.586441 |
+| 1,000 | 0.4487 | 0.355929 | 0.186620 |
+| 10,000 | 0.1509 | 0.096480 | 0.061541 |
+| 100,000 | 0.0477 | 0.030510 | 0.020730 |
+| 1,000,000 | 0.0162 | 0.010054 | 0.005339 |
+
+[//]: # (END_TABLE)
 
 ## Mathematical Framework:
 The goal of this section is to explore as much of the theory/underlying mathematics behind this project, accessible at a level of having taken Part 1A Probability.

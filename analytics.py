@@ -22,9 +22,6 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
     }
 
     for name,pricer_func in pricers.items():
-        print(f"--- Running {name} ---")
-        print(f"{'Paths (N)':<12} | {'MC Price':<10} | {'Standard Error':<10}")
-        print("-" * 38)
         for N in path_counts:
             simulated_prices =[]
             for experiment in range(num_experiments):
@@ -33,10 +30,8 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
             avg_mc_price = np.mean(simulated_prices)
             std_error = np.std(simulated_prices, ddof=1)
             errors_dict[name].append(std_error)
-            print(f"{N:<12} | {avg_mc_price:<10.2f} | {std_error:<10.4f}")
          
-            
-
+        
     plt.figure(figsize = (10,6))
     markers=['o','s', '^']
 
@@ -55,6 +50,39 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
     plt.savefig('convergence_graph.png', dpi=300, bbox_inches='tight')
 
     plt.show()
+
+    md_table = "| Paths (N) | Naive SE | Antithetic SE | Control SE |\n"
+    md_table += "|---|---|---|---|\n"
+    
+    for i, N in enumerate(path_counts):
+        naive_se = errors_dict["Naive MC"][i]
+        antithetic_se = errors_dict["Antithetic MC"][i]
+        control_se = errors_dict["Control MC"][i]
+        md_table += f"| {N:,} | {naive_se:.4f} | {antithetic_se:.6f} | {control_se:.6f} |\n"
+
+    try:
+        with open("README.md", "r") as file:
+            readme_content = file.read()
+
+        start_marker = "[//]: # (START_TABLE)"
+        end_marker = "[//]: # (END_TABLE)"
+
+        start_idx = readme_content.find(start_marker)
+        end_idx = readme_content.find(end_marker)
+
+        if start_idx != -1 and end_idx != -1:
+            top_half = readme_content[:start_idx + len(start_marker)]
+            bottom_half = readme_content[end_idx:]
+
+            new_readme = top_half + "\n\n" + md_table + "\n" + bottom_half
+            
+            with open("README.md", "w") as file:
+                file.write(new_readme)
+            print("\nSUCCESS: Table safely embedded in README")
+        else:
+            print("\nWARNING: Could not find the START_TABLE and END_TABLE markers in README.md.")
+    except Exception as e:
+        print(f"\nError updating README: {e}")
             
 
 
