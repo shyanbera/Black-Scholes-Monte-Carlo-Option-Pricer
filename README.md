@@ -74,6 +74,6 @@ which is why plotting on a log-log graph yiels a straight line.
 
 We observe that the gradients produced were very close to 0.5, confirming the $\mathcal{O}(N^{-1/2})$ convergence behaviour.
 
-We calculated $\rho$ as ...
+Also, we calculate $\sigma^2 = \exp(\text{y-intercept})^2$ giving an empircal value for the variance which allows us to compare the effectiveness of the three methods.
 
 
