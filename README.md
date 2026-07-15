@@ -6,7 +6,7 @@ The goal of this project was to use a Monte Carlo simulation to determine the fa
 
 This log-log graph (with gradient 1/2) confirms the $\mathcal{O}(N^{-1/2})$ convergence behaviour of the Monte Carlo algorithm and the decreasing y-intercepts show the effectiveness of the variance reduction techniques.
 
-!!!!! Remember to put some kind of statistic here as a hook :)))) come back to this at the end when you've understood everything
+We see that the Control Variates technique was particularly effective, reducing the variance to 10.2% of the Naive estimator.
 
 ![Log-Log Convergence Plot](convergence_graph.png)
 
@@ -19,11 +19,11 @@ Analytical Price: £10.45
 
 | Paths (N) | Naive SE | Antithetic SE | Control SE |
 |---|---|---|---|
-| 100 | 1.5009 | 1.0115 | 0.5984 |
-| 1,000 | 0.5103 | 0.3007 | 0.1646 |
-| 10,000 | 0.1617 | 0.0955 | 0.0561 |
-| 100,000 | 0.0429 | 0.0321 | 0.0184 |
-| 1,000,000 | 0.0154 | 0.0102 | 0.0059 |
+| 100 | 1.4783 | 1.0414 | 0.5261 |
+| 1,000 | 0.4425 | 0.3587 | 0.1572 |
+| 10,000 | 0.1590 | 0.1115 | 0.0543 |
+| 100,000 | 0.0408 | 0.0338 | 0.0183 |
+| 1,000,000 | 0.0139 | 0.0095 | 0.0054 |
 
 [//]: # (END_TABLE)
 

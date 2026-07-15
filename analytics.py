@@ -40,7 +40,8 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
         log_path_counts = np.log(path_counts)
         log_error = np.log(error_list)
         gradient, intercept = np.polyfit(log_path_counts,log_error,1)
-        plt.plot(path_counts,error_list,marker=marker,label=f"{name}, Gradient={gradient:.2f}, y-intercept={intercept:.2f}")
+        variance = (np.exp(intercept))**2
+        plt.plot(path_counts,error_list,marker=marker,label=f"{name}, Gradient={gradient:.2f}, y-intercept={intercept:.2f}, variance={variance:.2f}")
     plt.xscale('log')
     plt.yscale('log')
     plt.title('Standard error of MC value against number of paths simulated')
