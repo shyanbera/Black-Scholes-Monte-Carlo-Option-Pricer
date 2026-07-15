@@ -58,7 +58,7 @@ def convergence_test(S_0,r,sigma,T,K,num_experiments):
         naive_se = errors_dict["Naive MC"][i]
         antithetic_se = errors_dict["Antithetic MC"][i]
         control_se = errors_dict["Control MC"][i]
-        md_table += f"| {N:,} | {naive_se:.4f} | {antithetic_se:.6f} | {control_se:.6f} |\n"
+        md_table += f"| {N:,} | {naive_se:.4f} | {antithetic_se:.4f} | {control_se:.4f} |\n"
 
     try:
         with open("README.md", "r") as file:

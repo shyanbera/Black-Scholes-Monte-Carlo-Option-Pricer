@@ -19,11 +19,11 @@ Analytical Price: £10.45
 
 | Paths (N) | Naive SE | Antithetic SE | Control SE |
 |---|---|---|---|
-| 100 | 1.3541 | 1.032827 | 0.586441 |
-| 1,000 | 0.4487 | 0.355929 | 0.186620 |
-| 10,000 | 0.1509 | 0.096480 | 0.061541 |
-| 100,000 | 0.0477 | 0.030510 | 0.020730 |
-| 1,000,000 | 0.0162 | 0.010054 | 0.005339 |
+| 100 | 1.5009 | 1.0115 | 0.5984 |
+| 1,000 | 0.5103 | 0.3007 | 0.1646 |
+| 10,000 | 0.1617 | 0.0955 | 0.0561 |
+| 100,000 | 0.0429 | 0.0321 | 0.0184 |
+| 1,000,000 | 0.0154 | 0.0102 | 0.0059 |
 
 [//]: # (END_TABLE)
 
@@ -64,6 +64,16 @@ From the end of that section we note $\text{Var}(Y_{CV}) = \text{Var}(Y_{MC}) (1
 
 ### Chapter 5: Convergence Test Results
 
+By the Central Limit Theorem, we know that the theoretical standard error of the Monte Carlo algorithm scales with the inverse square root of N: (where $\sigma$ is the standard deviation of one path)
 
+$$SE = \frac{\sigma}{\sqrt{N}}$$
+
+Taking logs we obtain:
+$$\log(SE) = -0.5\log(N) +\log(\sigma)$$
+which is why plotting on a log-log graph yiels a straight line.
+
+We observe that the gradients produced were very close to 0.5, confirming the $\mathcal{O}(N^{-1/2})$ convergence behaviour.
+
+We calculated $\rho$ as ...
 
 
